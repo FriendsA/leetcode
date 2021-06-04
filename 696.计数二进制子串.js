@@ -32,7 +32,8 @@ var countBinarySubstrings = function (s) {
     }
     return res.length;
      */
-    // 思路2:
+    /** 
+     * 思路2:
     let arr = [], n = 1;
     for (let i = 0; i <= s.length; i++) {
         if (s[i] === s[i + 1]) {
@@ -45,6 +46,20 @@ var countBinarySubstrings = function (s) {
     let sum = 0;
     for (let i = 0; i < arr.length - 1; i++) {
         sum += Math.min(arr[i], arr[i + 1]);
+    }
+    return sum;
+     */
+    // 优化思路2:
+    let p = 0, last = 0, sum = 0;
+    while (p < s.length) {
+        let count = 0;
+        let c = s[p];
+        while (c === s[p]) {
+            p++;
+            count++;
+        }
+        sum += Math.min(count, last);
+        last = count;
     }
     return sum;
 };
